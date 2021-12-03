@@ -1,6 +1,5 @@
 package com.taller.taller1.Entity;
 
-import jdk.jfr.MemoryAddress;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -15,22 +14,22 @@ import java.util.Date;
 @Builder(toBuilder = true)
 public class ProjectTask {
     @NonNull
-    Long id;
+    public Long id;
     @NonNull
-    String name;
+    public String name;
     @NonNull
-    String summary;
-    String acceptanceCriteria;
+    public String summary;
+    public String acceptanceCriteria;
     @Value("${values: Not Started, in progress, completed, deleted}")
-    String status;
+    public String status;
     @Value("${values:1,2,3,4,5}")
-    Integer priority;
+    public Integer priority;
     @Value("${values:1,2,3,4,5,6,7,8}")
-    Double hours;
-    Date startDate;
-    Date endDate;
-    String projectIdentifier;
+    public Double hours;
+    public Date startDate;
+    public Date endDate;
+    public String projectIdentifier;
     @ManyToOne(targetEntity = Backlog.class)
-    Backlog backlog;
+    public Backlog backlog;
 
 }

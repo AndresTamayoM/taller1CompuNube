@@ -1,7 +1,10 @@
 package com.taller.taller1.Controller;
 
+import com.taller.taller1.Entity.Backlog;
 import com.taller.taller1.Entity.ProjectTask;
+import com.taller.taller1.Service.BacklogService;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +12,14 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("backlogAPI")
+@RequiredArgsConstructor
 public class Controller {
 
+    BacklogService backlogService;
+
     @PostMapping("/backlog")
-    public ResponseEntity aggregateBacklog(){
-        return ResponseEntity.created(URI.create("/createBacklog")).body("");
+    public Backlog aggregateBacklog(@RequestBody Backlog backlog){
+        return backlogService.saveBacklog(backlog);
     }
 
     @PostMapping("/project")
