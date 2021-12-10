@@ -1,32 +1,29 @@
 package com.taller.taller1.Entity;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
+import lombok.NonNull;
 
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import java.util.List;
-
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @Table(name = "Backlog")
+@Entity
 public class Backlog {
     @Id
-    Long id;
+    Integer id;
     @NonNull
-    String projectIdentifier;
+    Integer projectIdentifier;
     @OneToOne
     Project project;
     @OneToMany(targetEntity = ProjectTask.class)
-    List projectTask;
+    @JoinColumn(name="backlog")
+    Set<ProjectTask> projectTask = new HashSet<>();
 }

@@ -29,7 +29,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-	testImplementation group: 'com.h2database', name: 'h2', version: '2.0.202'
+	implementation group: 'com.h2database', name: 'h2', version: '2.0.202'
 }
 test {
 	useJUnitPlatform()

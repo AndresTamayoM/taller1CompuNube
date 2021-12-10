@@ -1,19 +1,23 @@
 package com.taller.taller1.Entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Getter
 @Setter
 @Builder(toBuilder = true)
+@AllArgsConstructor
+@Table(name = "ProjectTask")
+@Entity
 public class ProjectTask {
     @NonNull
+    @Id
     public Long id;
     @NonNull
     public String name;

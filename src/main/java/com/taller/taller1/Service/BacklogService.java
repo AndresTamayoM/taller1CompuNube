@@ -3,7 +3,6 @@ package com.taller.taller1.Service;
 import com.taller.taller1.Entity.Backlog;
 import com.taller.taller1.Entity.Project;
 import com.taller.taller1.Entity.ProjectTask;
-import javafx.concurrent.Task;
 
 import java.util.List;
 
@@ -17,12 +16,10 @@ public interface BacklogService {
 
     List<Project> getProjects();
 
-    List<ProjectTask> getProjectTasks(String projectId);
+    List<ProjectTask> getProjectTasks(Long projectId);
 
-    Double getProjectHours(String projectId);
+    Double getProjectHours(Long projectId);
 
-    Double getProjectHoursByStatus(String projectId, String status);
-
-    Project logicalDeleteProject(String projectId);
+    Double getProjectHoursByStatus(Long projectId, String status);
 
 }

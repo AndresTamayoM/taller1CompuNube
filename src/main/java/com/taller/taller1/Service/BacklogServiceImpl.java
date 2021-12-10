@@ -6,8 +6,8 @@ import com.taller.taller1.Entity.ProjectTask;
 import com.taller.taller1.Repository.BacklogRepository;
 import com.taller.taller1.Repository.ProjectRepository;
 import com.taller.taller1.Repository.TaskRepository;
-import javafx.concurrent.Task;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,32 +16,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BacklogServiceImpl implements BacklogService {
 
+    @Autowired
     BacklogRepository backlogRepository;
+    @Autowired
     ProjectRepository projectRepository;
+    @Autowired
     TaskRepository taskRepository;
 
+    @Override
     public Backlog saveBacklog(Backlog backlog) {
         return backlogRepository.save(backlog);
     }
-
+    @Override
     public Project saveProject(Project project) {
         return projectRepository.save(project);
     }
 
+    @Override
     public ProjectTask saveTask(ProjectTask projectTask) {
         return taskRepository.save(projectTask);
     }
 
+    @Override
     public List<Project> getProjects() {
         return projectRepository.findAll();
     }
 
-    public List<ProjectTask> getProjectTasks(String projectId) {
-        return taskRepository.findByProjectId(projectId);
+    @Override
+    public List<ProjectTask> getProjectTasks(Long projectId) {
+        return taskRepository.findByprojectIdentifier(projectId);
     }
-
-    public Double getProjectHours(String projectId) {
-        List<ProjectTask> lista = taskRepository.findByProjectId(projectId);
+    @Override
+    public Double getProjectHours(Long projectId) {
+        List<ProjectTask> lista = taskRepository.findByprojectIdentifier(projectId);
                 lista.stream().reduce((projectTask, projectTask2) -> {
                     projectTask.hours = projectTask.hours + projectTask2.hours;
                     return projectTask;
@@ -49,8 +56,9 @@ public class BacklogServiceImpl implements BacklogService {
                 return lista.get(0).hours;
     }
 
-    public Double getProjectHoursByStatus(String projectId, String status) {
-        List<ProjectTask> lista = taskRepository.findByProjectIdAndStatus(projectId, status);
+    @Override
+    public Double getProjectHoursByStatus(Long projectId, String status) {
+        List<ProjectTask> lista = taskRepository.findByprojectIdentifierAndStatus(projectId, status);
         lista.stream().reduce((projectTask, projectTask2) -> {
             projectTask.hours = projectTask.hours + projectTask2.hours;
             return projectTask;
@@ -58,7 +66,4 @@ public class BacklogServiceImpl implements BacklogService {
         return lista.get(0).hours;
     }
 
-    public Project logicalDeleteProject(String projectId) {
-        return projectRepository.logicalDeleteProject(projectId);
-    }
 }

@@ -1,10 +1,8 @@
 package com.taller.taller1.Controller;
 
 import com.taller.taller1.Entity.Backlog;
-import com.taller.taller1.Entity.ProjectTask;
 import com.taller.taller1.Service.BacklogService;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +10,13 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("backlogAPI")
-@RequiredArgsConstructor
 public class Controller {
 
+    @Autowired
     BacklogService backlogService;
 
     @PostMapping("/backlog")
-    public Backlog aggregateBacklog(@RequestBody Backlog backlog){
+    public Backlog save(@RequestBody Backlog backlog){
         return backlogService.saveBacklog(backlog);
     }
 
